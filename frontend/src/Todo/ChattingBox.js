@@ -22,7 +22,7 @@ function ChattingBox(props) {
 
     return (
         <div>
-            <IconButton color="inherit" onClick={toggleDrawer(true)}>
+            <IconButton color="inherit" onClick={toggleDrawer(true)} style={{ backgroundColor: 'transparent' }}>
                 <Badge badgeContent={props.badgeNum} color="error">
                     <ChatBubbleIcon sx={{ fontSize: 50 }} />
                 </Badge>

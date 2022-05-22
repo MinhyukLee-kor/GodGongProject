@@ -111,6 +111,7 @@ public class UserController {
     @GetMapping("/user/passwordChange/{key}")
     public ApiResponse isPasswordUUIdValidate(@PathVariable String key) {
         ApiResponse apiResponse;
+        System.out.println("key 인증 컨트롤러 들어왔다 : " + key);
         try {
             if (authService.isPasswordUuidValidate(key))
                 apiResponse = new ApiResponse(true, authService.getUserEmailByCode(key));

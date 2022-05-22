@@ -1,0 +1,13 @@
+.rankingbtn{
+    font-size: 23px;
+    color: darkcyan;
+}
+
+.rankingbtn:hover{
+    cursor:pointer;
+    color: lightpink;
+}
+
+.selected{
+    color: red;
+}

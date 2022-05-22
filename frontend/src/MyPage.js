@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import DiaryList from './DiaryList.js';
+import TimeCalendar from './TimeCalendar.js';
 import User from './user.js';
 import { isAuth, getNickName } from './jwtCheck';
 import './Mypage.css';
@@ -63,7 +64,7 @@ function MyPage(props) {
                     </a>
                 </div>
                 <div className="page">
-                    {menu == 1 ? <DiaryList /> : menu == 2 ? <User /> : menu == 3 ? <DiaryList /> : <User />}
+                    {menu == 1 ? <TimeCalendar /> : menu == 2 ? <User /> : menu == 3 ? <DiaryList /> : <User />}
                 </div>
             </div>
         </div>

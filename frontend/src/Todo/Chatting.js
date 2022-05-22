@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { getNickName } from '../jwtCheck.js';
-import { RoomNumContext, NewMessageContext, ClientContext } from './TodoStudy.js'
+import { RoomNumContext, NewMessageContext, ClientContext } from './TodoStudyRoom.js'
 
 let Receive = styled.div`
     height: 75%;
     overflow: auto;
     width: 100%;
-    padding: 10px;
+    padding: 1rem;
 `
 let Send = styled.div`
     height: 20%;
@@ -75,13 +75,19 @@ function Chatting() {
             <Receive>
                 {
                     newMessage && newMessage.map((chat, index) => (
-                        <div key={index} style={{ padding: '10px', paddingBottom: 0 }} ref={scrollRef}>
-                            <b>{chat.userNickname}</b><br/>
-                            <NewText>{chat.message}</NewText>
-                        </div>
+                        chat.userNickname == userNickname
+                            ? (<div key={index} style={{ padding: '10px', paddingBottom: 0, textAlign: 'right' }} ref={scrollRef}>
+                                <b>{chat.userNickname}</b><br />
+                                <NewText>{chat.message}</NewText>
+                            </div>)
+                            : (<div key={index} style={{ padding: '10px', paddingBottom: 0 }} ref={scrollRef}>
+                                <b>{chat.userNickname}</b><br />
+                                <NewText>{chat.message}</NewText>
+                            </div>)
                     ))
                 }
             </Receive>
+            {/* 그냥 구경하러 온 사람은 채팅 못남기게 textarea 비활성화 */}
             <Send>
                 <div style={{ height: '20%' }}>{userNickname}</div>
                 <Text onKeyUp={(e) => {

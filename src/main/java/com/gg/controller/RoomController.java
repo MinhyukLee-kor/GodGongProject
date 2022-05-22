@@ -45,6 +45,11 @@ public class RoomController {
         return roomService.createRoom(roomCategory, roomTitle, userNickname);
     }
 
+    @GetMapping(value = "/room/check")
+    public Roomlog checkRoomlog(@RequestParam String userNickname) {
+        return roomlogService.checkRoomlog(userNickname);
+    }
+
     @PostMapping(value = "/room/enter")
     public Roomlog enterRoom(@RequestParam String userNickname, @RequestParam String roomNumber) {
         return roomlogService.enterRoom(userNickname, roomNumber);

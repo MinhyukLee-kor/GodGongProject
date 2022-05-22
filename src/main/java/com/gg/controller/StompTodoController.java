@@ -20,17 +20,25 @@ public class StompTodoController {
     private final TodoService todoService;
 
     @MessageMapping("/todo/add")
-    public void addTodo(Todo todo){
-        simpMessageSendingOperations.convertAndSend("/sub/room/" + todo.getRoom().getRoomNumber(), todo);
+    public void addTodo(ResultDTO resultDTO){
+        resultDTO.setResult("done");
+        simpMessageSendingOperations.convertAndSend("/sub/room/" + resultDTO.getRoomNumber(), resultDTO);
     }
 
     @MessageMapping("/todo/check")
-    public void check(Todo todo){
+    public void checkTodo(Todo todo){
         todoService.checkTodo(todo);
         ResultDTO resultDTO = new ResultDTO();
+        resultDTO.setUserNickname(todo.getUser().getNickname());
+        resultDTO.setRoomNumber(todo.getRoom().getRoomNumber());
         resultDTO.setResult("done");
-        simpMessageSendingOperations.convertAndSend("/sub/room/" + todo.getRoom().getRoomNumber(), resultDTO);
+        simpMessageSendingOperations.convertAndSend("/sub/room/" + resultDTO.getRoomNumber(), resultDTO);
     }
 
-
+    @MessageMapping("/todo/delete")
+    public void deleteTodo(ResultDTO resultDTO){
+        todoService.deleteTodo(resultDTO.getUserNickname(), resultDTO.getRoomNumber());
+        resultDTO.setResult("done");
+        simpMessageSendingOperations.convertAndSend("/sub/room/" + resultDTO.getRoomNumber(), resultDTO);
+    }
 }

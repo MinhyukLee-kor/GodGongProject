@@ -1,0 +1,31 @@
+.page{
+    width:1140px;
+    height:400px;
+    margin:0 auto;
+
+}
+
+.timeCalendar{
+    float:left;
+    width:500px;
+    height:400px;
+}
+
+.calendar-container{
+    margin: 0 auto;
+    font-size:15pt;
+}
+
+.text-center{
+    margin-top:20px;
+    margin-bottom:25px;
+}
+
+.totaltime{
+    float:left;
+}
+
+.totaltime2{
+    margin-top:20px;
+}
+

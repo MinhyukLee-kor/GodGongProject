@@ -1,6 +1,5 @@
 package com.gg.repository;
 
-import com.gg.domain.Diary;
 import com.gg.domain.Room;
 import com.gg.domain.Todo;
 import com.gg.domain.User;

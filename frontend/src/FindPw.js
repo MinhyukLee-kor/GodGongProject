@@ -27,7 +27,6 @@ function FindPw() {
     
     return (
         <div>
-            왜 json만 나와아악
         </div>
     );
 }

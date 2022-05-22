@@ -18,36 +18,28 @@ import {
 import './join.css';
 import { useNavigate } from 'react-router-dom';
 
-
-
-const Register = () => {
+const FindPassword = () => {
 
     const [emailError, setEmailError] = useState('');
-
     const navigate = useNavigate();
 
+    const onhandlePost = (email) => {
 
-
-
-    const onhandlePost = async (data) => {
-        const { email } = data;
-        const postData = { email };
-
-        await axios
-            .post('/api/user/password', postData)
+        axios.post('/api/user/password', { email: email })
             .then(function (res) {
                 if (res.data.success == true) {
-                    alert('메일함에서 비밀번호 변경 메일을 확인해주세요!');
-                    navigate('/login');
-                } else if (res.data.message == '사용자 정보를 조회할 수 없습니다.') {
-                    alert('등록되지 않은 이메일입니다😰');
+                    alert(res.data.message);
+                    navigate('/');
+
+                } else if (res.data.success == false) {
+                    alert('회원에 등록되지 않은 이메일입니다😰 다시 시도해주세요.');
                 } else {
                     alert(res.data.message);
                 }
             })
             .catch(function (err) {
                 console.log(err);
-                console.log(postData);
+                console.log(email);
                 console.log(origin);
                 console.log(err.response.data.message);
                 if (err.response.status === 400) {
@@ -62,26 +54,17 @@ const Register = () => {
         e.preventDefault();
 
         const data = new FormData(e.currentTarget);
-        const joinData = {
-            email: data.get('email'),
-
-
-        };
-        const { email } = joinData;
+        const email = data.get('email');
 
         // 이메일 유효성 체크
         // 이메일 유효성 체크
         const emailRegex = /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-        if (!emailRegex.test(email)) setEmailError('올바른 이메일 형식이 아닙니다!');
-        else setEmailError('');
-        if (
-            emailRegex.test(email)
-
-
-        ) {
-            onhandlePost(joinData);
+        if (!emailRegex.test(email)) {
+            setEmailError('올바른 이메일 형식이 아닙니다!');
+        } else {
+            setEmailError('');
+            onhandlePost(email);
         }
-
     };
 
 
@@ -146,4 +129,4 @@ const Register = () => {
 
     );
 };
-export default Register;
+export default FindPassword;

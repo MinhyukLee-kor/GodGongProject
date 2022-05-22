@@ -1,13 +1,11 @@
 package com.gg.controller;
 
 import com.gg.dto.StudyRankDTO;
-import com.gg.dto.StudylogInterface;
 import com.gg.service.StudylogService;
 import com.gg.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,37 +40,26 @@ public class StudylogController {
         int week = studylogService.oneWeekTime(nickname);
         int month = studylogService.oneMonthTime(nickname);
         int total = studylogService.totalTime(nickname);
-        studytime.add(day);
-        studytime.add(week);
-        studytime.add(month);
-        studytime.add(total);
+
+        studytime.add(0,day);
+        studytime.add(1,week);
+        studytime.add(2,month);
+        studytime.add(3,total);
+
         return studytime;
     }
 
-    @PostMapping("/api/mypage/studytime/select")
-    public Integer selectStudyTime(String nickname, Date date){
-        int time = studylogService.selectDayTime(nickname, date);
-        return time;
+    @PostMapping("/api/mypage/studytime/calendar")
+    public List<String> calendarTime(@RequestBody HashMap<String,String>param){
+        String nickname = param.get("nickname");
+        String date = param.get("date");
+        return studylogService.calendarTime(nickname, date);
     }
 
     @GetMapping("/api/main/studytime/summary")
-    public List<StudyRankDTO> Ranking(){
-        List<StudyRankDTO> ranks = new ArrayList<>();
-        int length = studylogService.Daytop10Studytime().size();
-        for(int i=0;i<length;i++) {
-            Long id = studylogService.Daytop10Studytime().get(i).getId();
-            int day = studylogService.Daytop10Studytime().get(i).getTime();
-            int week = studylogService.Weektop10Studytime().get(i).getTime();
-            int month = studylogService.Monthtop10Studytime().get(i).getTime();
-            String nickname = userService.findNickname(id);
-            StudyRankDTO sr = new StudyRankDTO();
-            sr.setDay(day);
-            sr.setWeek(week);
-            sr.setMonth(month);
-            sr.setNickname(nickname);
-            ranks.add(i, sr);
-        }
-        return ranks;
+    public List<List<StudyRankDTO>> Ranking() {
+        List<List<StudyRankDTO>> result = studylogService.Ranking();
+        return result;
     }
 
     @GetMapping("/api/studytime/recent")

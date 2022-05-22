@@ -6,11 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class StudyRankDTO {
-    String Nickname;
+    String nickname;
 
-    Integer day;
+    Integer time;
 
-    Integer week;
-
-    Integer month;
 }
