@@ -69,7 +69,7 @@ function MakeTodoStudy({ setOpen, update, setUpdate }) {
             />
             <Button
                 variant="contained"
-                style={{ marginTop: '1rem' }}
+                style={{ marginTop: '1rem', backgroundColor: '#2fbe9f ' }}
                 onClick={() => submitStudy()}>스터디 만들기</Button>
         </Wrapper>
     );

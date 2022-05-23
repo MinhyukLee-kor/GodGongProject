@@ -128,7 +128,7 @@ function MakeTodo({ setOpen, task }) {
             {/* Todo추가버튼은 아이콘으로 변경 */}
             <Button
                 variant="contained"
-                style={{ marginTop: '1rem' }}
+                style={{ marginTop: '1rem', backgroundColor: '#2fbe9f ' }}
                 onClick={() => {
                     if (todos.length == 0) {
                         return Swal.fire({
@@ -145,7 +145,7 @@ function MakeTodo({ setOpen, task }) {
                     postTodo();
                     setOpen(false);
                     joinStudy();
-                }}>스터디시작</Button>
+                }}>스터디 시작</Button>
         </Wrapper>
     );
 }

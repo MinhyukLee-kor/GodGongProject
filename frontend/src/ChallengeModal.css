@@ -27,10 +27,10 @@
 
 .modalContainer .title h2 {
   margin-bottom: 20px;
-  }
+}
 
 .modalContainer .title h1 {
-font-size:70px;
+  font-size: 70px;
 }
 
 .titleCloseBtn {
@@ -66,21 +66,22 @@ font-size:70px;
   height: 45px;
   margin: 10px;
   border: none;
-  background-color: rgb(185, 185, 185);
-  color: white;
+  background-color: #2f72be;
+  color: #ececec;
   border-radius: 8px;
   font-size: 20px;
   cursor: pointer;
 }
 
 #cancelBtn {
-  background-color: rgb(78, 173, 188);
+  background-color: #2fbe9f;
+  color: #ececec;
 }
 
-.title h2{
+.title h2 {
   text-align: center;
 }
 
-.title h3{
-  font-size:25pt;
+.title h3 {
+  font-size: 25pt;
 }

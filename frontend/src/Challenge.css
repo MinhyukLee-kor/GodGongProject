@@ -1,130 +1,130 @@
-  * {
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
-  }
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
 
-  .main-section {
-    background: transparent;
-    max-width: 600px;
-    width: 90%;
-    height: 500px;
-    margin: 30px auto;
-    background-color: rgb(163, 163, 163);
-  }
+.main-section {
+  background: transparent;
+  max-width: 600px;
+  width: 90%;
+  height: 500px;
+  margin: 30px auto;
+  background-color: rgb(163, 163, 163);
+}
 
-  .clock-holder {
-    width: 1300px;
-    height: 480px;
-    background: rgb(155, 214, 211);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    border-radius: 50px;
-    margin: 0 auto 60px auto;
-    position: relative;
-    padding-left:20px;
-  }
+.clock-holder {
+  width: 1300px;
+  height: 480px;
+  background: rgb(155, 214, 211);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 50px;
+  margin: 0 auto 60px auto;
+  position: relative;
+  padding-left:20px;
+}
 
-  .canvas-holder{
-    display: inline-block;
-    float: right;
-    width:300px;
-    height:150px;
-  }
+.canvas-holder{
+  display: inline-block;
+  float: right;
+  width:300px;
+  height:150px;
+}
 
-  #canvas{
-    width:140px;
-    height:140px;
-    float:right;
-    margin-right:60px;
-    margin-top:50px;
-    border-radius: 20px;
-    border:solid 8px #0c5054
-  }
+#canvas{
+  width:140px;
+  height:140px;
+  float:right;
+  margin-right:60px;
+  margin-top:50px;
+  border-radius: 20px;
+  border:solid 8px #0c5054
+}
 
 
-  .clock-title1 {
-    float:left;
-    font-size: 40px;
-    font-weight: 600;
-    margin-top: 80px;
-    margin-left: 60px;
-    margin-bottom: 70px;
-    text-align: left;
-    color: #1E8185;
-  }
+.clock-title1 {
+  float:left;
+  font-size: 40px;
+  font-weight: 600;
+  margin-top: 80px;
+  margin-left: 60px;
+  margin-bottom: 70px;
+  text-align: left;
+  color: #1E8185;
+}
 
-  .stopwatch {
-    padding: 0 0 100px 0;
-    text-align: center;
-  }
+.stopwatch {
+  padding: 0 0 100px 0;
+  text-align: center;
+}
 
-  .stopwatch span {
-    /* background:#00ABA9; */
-    color: rgb(255, 255, 255);
-    display: inline-block;
-    font-family: monospace;
-    font-size: 100px;
-    font-weight: 700;
-    padding: 20px;
-    border-radius: 5px;
-    width: 200px;
+.stopwatch span {
+  /* background:#00ABA9; */
+  color: rgb(255, 255, 255);
+  display: inline-block;
+  font-family: monospace;
+  font-size: 100px;
+  font-weight: 700;
+  padding: 20px;
+  border-radius: 5px;
+  width: 200px;
 
-  }
+}
 
-  .stopwatch .stopwatch-btn {
-    margin-top: 80px;
-    margin-left: 5px;
-    border: none;
-    border-radius: 50%;
-    padding: 10px 16px;
-    font-size: 20px;
-    font-weight: 800;
-    text-transform: uppercase;
-    width: 130px;
-    height: 130px;
-    cursor: pointer;
-    transition: all 0.2s ;
-    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
-  }
+.stopwatch .stopwatch-btn {
+  margin-top: 80px;
+  margin-left: 5px;
+  border: none;
+  border-radius: 50%;
+  padding: 10px 16px;
+  font-size: 20px;
+  font-weight: 800;
+  text-transform: uppercase;
+  width: 130px;
+  height: 130px;
+  cursor: pointer;
+  transition: all 0.2s ;
+  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+}
 
-  .stopwatch .stopwatch-btn-red {
-    background: #A74982;
-    box-shadow: 0px 10px 0px 0px #6D184B;
-    color: #ffffff;
-  }
+.stopwatch .stopwatch-btn-red {
+  background: #fd565f;
+  box-shadow: 0px 10px 0px 0px #ce444b;
+  color: #ececec;
+}
 
-  .stopwatch .stopwatch-btn-yel {
-    background: #FF8E00;
-    box-shadow: 0px 10px 0px 0px #A66615;
-    color: #ffffff;
-  }
+.stopwatch .stopwatch-btn-yel {
+  background:#2f72be;
+  box-shadow: 0px 10px 0px 0px #245791;
+  color: #ececec;
+}
 
-  .stopwatch .stopwatch-btn-gre {
-    background: #01939A;
-    box-shadow: 0px 10px 0px 0px #1E8185;
-    color: #ffffff;
-  }
+.stopwatch .stopwatch-btn-gre {
+  background: #2fbe9f;
+  box-shadow: 0px 10px 0px 0px #289a81;
+  color: #ececec;
+}
 
-  .stopwatch .stopwatch-btn-red:hover {
-    background: #A74982;
-    margin-top: 20px;
-    margin-bottom: 5px;
-    box-shadow: 0px 0px 0px 0px #6D184B;
-    color: #fff;
-  }
+.stopwatch .stopwatch-btn-red:hover {
+  background: #fd565f;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  box-shadow: 0px 0px 0px 0px #ce444b;
+  color: #ececec;
+}
 
-  .stopwatch .stopwatch-btn-yel:hover {
-    background: #FF8E00;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    box-shadow: 0px 0px 0px 0px #A66615;
-    color: #fff;
-  }
+.stopwatch .stopwatch-btn-yel:hover {
+  background: #2f72be;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  box-shadow: 0px 0px 0px 0px#245791;;
+  color: #ececec;
+}
 
-  .stopwatch .stopwatch-btn-gre:hover {
-    background: #01939A;
-    /* margin-top: 15px;
-    margin-bottom: 5px; */
-    box-shadow: 0px 0px 0px 0px #1E8185;
-    color: #fff;
-  }
+.stopwatch .stopwatch-btn-gre:hover {
+  background: #2fbe9f;
+  /* margin-top: 15px;
+  margin-bottom: 5px; */
+  box-shadow: 0px 0px 0px 0px #289a81;
+  color: #ececec;
+}
