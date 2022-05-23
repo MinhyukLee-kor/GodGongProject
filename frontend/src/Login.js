@@ -6,8 +6,6 @@ import {
 
     Button,
     TextField,
-    FormControlLabel,
-    Checkbox,
     FormHelperText,
     Grid,
     Box,
@@ -16,7 +14,7 @@ import {
     Link,
 
 } from '@mui/material/';
-
+import Swal from 'sweetalert2';
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -53,14 +51,32 @@ const Resigter = (props) => {
                 localStorage.setItem('accessToken', JSON.stringify(response.data));
 
                 if (response.status === 200) {
-                    alert('로그인 되었습니다!');
-                    props.setIsLogin(!props.isLogin);
-                    navigate('/');
+                    Swal.fire({
+                        confirmButtonColor: '#2fbe9f',
+
+                        confirmButtonText: '확인',
+                        text: '로그인 되었습니다!😊',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            props.setIsLogin(!props.isLogin);
+                            navigate('/');
+                        }
+
+                    });
+
+
                 }
             })
             .catch(function (err) {
                 console.log(err);
-                alert("이메일 혹은 비밀번호가 틀렸습니다!");
+                Swal.fire({
+                    confirmButtonColor: '#2fbe9f',
+
+                    confirmButtonText: '확인',
+                    text: '이메일 혹은 비밀번호가 틀렸습니다!😥', // Alert 제목 
+
+                });
+
             });
     };
 

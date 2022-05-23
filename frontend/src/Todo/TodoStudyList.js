@@ -11,6 +11,12 @@ let Wrapper = styled.div`
     margin: auto;
     margin-top: 2vh;
     margin-bottom: 2vh;
+    span {
+        margin: auto;
+        padding: 15vh 0;
+        font-size: 20pt;
+        color: grey;
+    }
     width: ${props => props.isHome ? '0' : '65vw'}
 `
 
@@ -30,9 +36,9 @@ function TodoStudyList(props) {
     sliceTodoList = rooms && rooms.slice(0, LastIndex);
 
     useEffect(() => {
-        console.log(props.ishome);
         axios.get('/api/chat/rooms')
             .then(res => {
+                console.log(res.data);
                 setRooms(res.data);
             })
             .catch(error => {
@@ -46,15 +52,18 @@ function TodoStudyList(props) {
                 props.isHome || !userNickname
                     ? null
                     : <AddCircleOutlineRoundedIcon
-                        sx={{ fontSize: 60, float: 'right' }}
+                        sx={{ fontSize: 60, float: 'right', cursor: 'pointer' }}
                         onClick={() => setModalOpen(true)} />
             }
-            <h1 style={{ textAlign: 'left', margin: '1rem 1rem 0' }}>함께하는 Todo✅</h1>
+
+            <h1 style={{ textAlign: 'left', margin: '1rem 0' }}>함께하는 Todo✅</h1>
+
             {
                 modalOpen && <TodoModal
                     task='createStudy'
                     open={modalOpen}
                     setOpen={setModalOpen}
+                    update={update}
                     setUpdate={setUpdate} />
             }
             <Grid container
@@ -62,9 +71,11 @@ function TodoStudyList(props) {
                 alignItems="stretch"
                 spacing={1}>
                 {
-                    sliceTodoList && sliceTodoList.map(studyRoom => {
-                        return <TodoCard studyRoom={studyRoom} key={studyRoom.roomNumber} />
-                    })
+                    rooms.length != 0
+                        ? sliceTodoList && sliceTodoList.map(studyRoom => {
+                            return <TodoCard studyRoom={studyRoom} key={studyRoom.roomNumber} />
+                        })
+                        : <span>현재 운영중인 todo스터디가 없습니다.</span>
                 }
             </Grid>
 

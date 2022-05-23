@@ -1,16 +1,12 @@
 package com.gg.controller;
 
 import com.gg.domain.Todo;
-import com.gg.dto.EnterRoomDTO;
 import com.gg.dto.ResultDTO;
-import com.gg.service.RoomlogService;
 import com.gg.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor

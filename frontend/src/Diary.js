@@ -13,7 +13,7 @@ import {
 
 } from '@mui/material/';
 import './diary.css';
-
+import Swal from 'sweetalert2';
 
 
 const Diary = () => {
@@ -48,8 +48,14 @@ const Diary = () => {
 
     useEffect(() => {
         if (!isAuth(token)) {
-            alert('로그인 후 이용하실 수 있어요😥');
-            return navigate('/login');
+            Swal.fire({
+                confirmButtonColor: '#2fbe9f',
+
+                confirmButtonText: '확인',
+                text: '로그인 후 이용하실 수 있어요😥', // Alert 제목 
+
+            });
+            navigate('/login');
         }
     }, []);
 
@@ -57,16 +63,24 @@ const Diary = () => {
         axios
             .post('/api/diary/post', body)
             .then(function (response) {
-                navigate('/mypage');
-                console.log(response);
-                alert("일기가 작성되었습니다!");
+                Swal.fire({
+                    confirmButtonColor: '#2fbe9f',
+
+                    confirmButtonText: '확인',
+
+                    text: "일기가 작성되었습니다!😊", // Alert 내용 
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigate('/mypage');
+                    }
+
+                });
+
 
 
             })
             .catch(function (err) {
                 console.log(err);
-                console.log(state);
-                console.log(origin);
                 console.log(err.response.data.message);
                 if (err.response.status === 400) {
                     alert(err.response.data.message);

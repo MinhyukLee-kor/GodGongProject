@@ -1,5 +1,6 @@
 package com.gg.service;
 
+import com.gg.domain.Room;
 import com.gg.domain.Roomlog;
 import com.gg.domain.User;
 import com.gg.repository.RoomRepository;
@@ -30,8 +31,18 @@ public class RoomlogService {
         return roomlog;
     }
 
-    public void exitRoom(String nickName) {
-        User user = userRepository.findByNickname(nickName);
+    public void exitRoom(String userNickName) {
+        User user = userRepository.findByNickname(userNickName);
+        Room room = roomlogRepository.findByUser(user).getRoom();
+        if(room.getUser().getNickname().equals(userNickName)){
+            if(Math.toIntExact(roomlogRepository.count()) == 1) {
+                room.setRoomValid(false);
+                roomRepository.save(room);
+            } else {
+                room.setUser(roomlogRepository.findNextUser().getUser());
+                roomRepository.save(room);
+            }
+        }
         roomlogRepository.deleteByUser(user);
     }
 }

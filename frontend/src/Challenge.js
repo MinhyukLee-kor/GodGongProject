@@ -8,7 +8,7 @@ import * as tmPose from '@teachablemachine/pose';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
+import Swal from 'sweetalert2';
 function Challenge(props) {
 
 
@@ -75,7 +75,7 @@ function Challenge(props) {
         console.log(body);
       })
       .catch(function (error) {
-        console.log(error)
+        console.log(error);
       });
 
     await axios.get('/api/studytime/recent', { params: { nickname: nickname } })
@@ -85,7 +85,7 @@ function Challenge(props) {
       })
       .catch(error => {
         console.log(error);
-      })
+      });
   };
 
   const resume = () => start();
@@ -95,8 +95,14 @@ function Challenge(props) {
 
   useEffect(() => {
     if (!isAuth(token)) {
-      alert('로그인 후 이용하실 수 있어요😥');
-      return navigate('/login');
+      Swal.fire({
+        confirmButtonColor: '#2fbe9f',
+
+        confirmButtonText: '확인',
+        text: '로그인 후 이용하실 수 있어요😥', // Alert 제목 
+
+      });
+      navigate('/login');
     }
 
     return () => camStop();
@@ -149,9 +155,9 @@ function Challenge(props) {
     // Prediction 2: run input through teachable machine classification model
     const prediction = await model.predict(posenetOutput);
     if (prediction[0].probability.toFixed(2) >= 0.50) {
-      check = "공부중"
+      check = "공부중";
     } else if (prediction[1].probability.toFixed(2) >= 0.90) {
-      check = "자리비움"
+      check = "자리비움";
     }
 
     /*
@@ -164,7 +170,7 @@ function Challenge(props) {
         // {props.stop};
       }
     */
-    
+
 
     // finally draw the poses
     drawPose(pose);
@@ -193,12 +199,12 @@ function Challenge(props) {
     <div className="main-secion">
       <div className="clock-holder">
         <div className="canvas-holder"><canvas id="canvas"></canvas></div>
-        <div className="clock-title1">{getNickName(token)} 님의 오늘의 챌린지</div>
+        <div className="clock-title1">{getNickName(token)}님의 오늘의 챌린지</div>
         <div className="stopwatch">
           {openModal && <ChallengeModal timedata={timedata} closeModal={setOpenModal} />}
           <DisplayComponent className="DisplayComponent" time={time} />
           <BtnComponent setOpenModal={setOpenModal} status={status} resume={resume} reset={reset} stop={stop} start={start} />
-          
+
           <div id="label-container"></div>
         </div>
       </div>

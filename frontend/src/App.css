@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   background-color: rgb(236, 243, 241);
+
 }
 
 a {
@@ -10,8 +11,4 @@ a {
 
 a:hover {
   color: saddlebrown;
-}
-
-span {
-  margin: 1rem;
 }

@@ -5,16 +5,17 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import DiaryCom from "./components/DiaryCom";
-
+import Pagination from "./Pagination";
 import { isAuth, getNickName } from './jwtCheck';
 import {
 
-    Box,
+
     Container,
 
 
 } from '@mui/material/';
 import './DiaryList.css';
+import Swal from 'sweetalert2';
 function DiaryList(diary) {
 
 
@@ -27,23 +28,30 @@ function DiaryList(diary) {
     const [loading, setLoading] = useState(true);
     const [diaries, setDiaries] = useState([]);
     const [state, setsState] = useState();
+
+    const [limit, setLimit] = useState(5);
+    const [page, setPage] = useState(1);
+    const offset = (page - 1) * limit;
     const getDiaries = async () => {
         const json = await axios.get('/api/diary/mydiary', { params: { nickname: nickname } });
         setDiaries(json.data);
-        console.log(json.data);
-        console.log(nickname);
         setLoading(false);
-        console.log(diaries.diaryContent);
         setsState(false);
 
     };
     useEffect(() => {
         getDiaries();
         if (!isAuth(token)) {
-            alert('로그인 후 이용하실 수 있어요😥');
-            return navigate('/login');
+            Swal.fire({
+                confirmButtonColor: '#2fbe9f',
+
+                confirmButtonText: '확인',
+                text: '로그인 후 이용하실 수 있어요😥', // Alert 제목 
+
+            });
+            navigate('/login');
         }
-    }, [state == true]);
+    }, [state === true]);
 
 
     const handleSubmit = (diaryId) => {
@@ -51,9 +59,19 @@ function DiaryList(diary) {
         axios
             .get('/api/diary/delete/' + diaryId, { params: { diaryId: diaryId } })
             .then(function (response) {
-                console.log(response.status, '성공');
+                Swal.fire({
+                    confirmButtonColor: '#2fbe9f',
 
-                setsState(true);
+                    confirmButtonText: '확인',
+                    text: '일기가 삭제되었습니다!😊', // Alert 제목 
+
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        setsState(true);
+                    }
+
+                });
+
 
 
 
@@ -63,11 +81,6 @@ function DiaryList(diary) {
             .catch(function (err) {
                 console.log(err);
                 console.log(err.response.data.message);
-                if (err.response.status === 400) {
-                    alert(err.response.data.message);
-                }
-
-
             });
 
     };
@@ -96,13 +109,25 @@ function DiaryList(diary) {
 
                     <Container className='diary_header'>
 
-                        <div > <h2>공부일기📆</h2></div>
-                        <div >   <button className="diary" type="submit" onClick={() => move_dairy()}>일기쓰기</button></div>
+                        <div className='paging'> <h2>공부일기📆</h2>
+                            <select
+                                type="number"
+                                value={limit}
+                                onChange={({ target: { value } }) => setLimit(Number(value))}
+                            >
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select></div>
+                        <div>   <button className="diary" type="submit" onClick={() => move_dairy()}>일기 쓰기</button></div>
 
                     </Container>
+
                     <div >
 
-                        {diaries.map((diary) => (
+                        {diaries.slice(offset, offset + limit).map((diary) => (
 
                             <DiaryCom
                                 diary={diary}
@@ -120,6 +145,12 @@ function DiaryList(diary) {
 
 
                     </div>
+                    <Pagination
+                        total={diaries.length}
+                        limit={limit}
+                        page={page}
+                        setPage={setPage}
+                    />
                 </div>
             )}
         </div>

@@ -26,16 +26,20 @@ textarea {
     font-size: medium;
     font-weight: 600;
     width: 26% !important;
+
 }
 
 .DiaryEditor textarea {
     padding: 10px;
     height: 200px;
     width: 100% !important;
+
     border: 3px solid #2fbe9f;
     border-radius: 20px;
-
+    box-shadow: 0px 5px 5px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 }
+
+
 
 .DiaryEditor div {
     margin-top: 10px;
@@ -54,34 +58,21 @@ textarea {
     height: 40px;
 }
 
-.DiaryButton {
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
+.paging {
+    display: flex;
+    text-align: center;
+    align-items: center;
 
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-
-    font-size: 18px;
-    white-space: nowrap;
 }
 
-.DiaryButton_default {
-    background-color: #ececec;
-    color: black;
+.paging>select {
+    height: 20px;
+
+    align-items: center;
+    margin-left: 10px;
 }
 
-.DiaryButton_positive {
-    background-color: #2fbe9f;
-    color: white;
-}
 
-.DiaryButton_negative {
-    background-color: #fd565f;
-    color: white;
-}
 
 .content {
 
@@ -90,10 +81,12 @@ textarea {
     padding: 10px;
 
     margin: 0 auto;
+    overflow: hidden;
     text-overflow: ellipsis;
-
-    white-space: nowrap;
+    word-break: normal;
+    white-space: pre-line;
     vertical-align: top;
+
 
 }
 
@@ -104,17 +97,20 @@ textarea {
 .content>span {
 
     font-size: 1.3rem;
-    white-space: pre;
+
     margin: 0 !important;
+
 
 }
 
 
 .d_list {
+    background-color: rgb(255, 255, 255);
     border: 3px solid #2fbe9f;
     border-radius: 20px;
     padding: 10px;
     margin-bottom: 18px;
+
 }
 
 
@@ -135,6 +131,7 @@ textarea {
     border-radius: 10px;
     color: #ececec;
     font-weight: 600;
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 }
 
 .delBtn {
@@ -143,6 +140,7 @@ textarea {
     border-radius: 10px;
     color: #000000;
     font-weight: 600;
+    box-shadow: none !important;
 }
 
 .more {
@@ -156,7 +154,7 @@ textarea {
     border-radius: 10px;
     color: #ececec;
     font-weight: 600;
-
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 }
 
 .message {
@@ -171,13 +169,7 @@ textarea {
 
 }
 
-.success {
-    display: none;
-}
 
-.error {
-    color: #ff2727;
-}
 
 .flex {
     margin: 0 !important;
@@ -201,7 +193,8 @@ textarea {
     justify-content: space-between;
     text-align: center;
     padding: 20px;
-
+    padding-left: 0 !important;
+    padding-right: 0 !important;
     width: 50% !important;
 }
 

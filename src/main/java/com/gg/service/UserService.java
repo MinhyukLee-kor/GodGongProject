@@ -2,14 +2,16 @@ package com.gg.service;
 
 import com.gg.config.jwt.JwtTokenProvider;
 import com.gg.domain.User;
-import com.gg.repository.UserRepository;
+import com.gg.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
+@Transactional
 public class UserService {
 
     @Autowired
@@ -24,12 +26,42 @@ public class UserService {
     @Autowired
     JwtTokenProvider tokenProvider;
 
+    @Autowired
+    DiaryRepository diaryRepository;
+
+    @Autowired
+    StudylogRepository studylogRepository;
+
+    @Autowired
+    RoomRepository roomRepository;
+
+    @Autowired
+    RoomlogRepository roomlogRepository;
+
+    @Autowired
+    TodoRepository todoRepository;
+
+    @Autowired
+    RefreshTokenRepository refreshTokenRepository;
+
     public User findBynickname(String nickname){
        return userRepository.findByNickname(nickname);
     }
 
     // 회원 정보 삭제
     public void deleteUser(Long id){
+        //일기
+        diaryRepository.deleteAllByUserId(id);
+        //공부시간
+        studylogRepository.deleteAllByUserId(id);
+        //스터디룸
+        roomRepository.deleteAllByUserId(id);
+        //투두리스트
+        todoRepository.deleteAllByUserId(id);
+        //룸로그
+        roomlogRepository.deleteAllByUserId(id);
+        //토큰
+        refreshTokenRepository.deleteAllByUserId(id);
         userRepository.deleteById(id);
     }
 

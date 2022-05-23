@@ -39,4 +39,6 @@ public interface StudylogRepository extends JpaRepository<Studylog, Long> {
 
     @Query(value="select studylog_time from studylog where user_id=?1 order by studylog_created DESC limit 1", nativeQuery = true)
     Integer recentStudyTime(Long id);
+
+    void deleteAllByUserId(Long Id);
 }

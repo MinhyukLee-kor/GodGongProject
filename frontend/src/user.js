@@ -1,10 +1,10 @@
 
-import { useState, useEffect, useContext, useCallback } from "react";
-import { isAuth, getNickName, getId } from './jwtCheck';
+import { useState, useEffect, useCallback } from "react";
+import { isAuth, getId } from './jwtCheck';
 import axios from 'axios';
 
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
 
     Box,
@@ -14,7 +14,7 @@ import {
 } from '@mui/material/';
 import './User.css';
 
-
+import Swal from 'sweetalert2';
 
 const User = (props) => {
 
@@ -49,19 +49,22 @@ const User = (props) => {
 
     const getUser = async () => {
         const json = await axios.get('/api/users/' + userId, { params: { id: userId } });
-        console.log(json);
         setUser(json.data);
         setNick(json.data.nickname);
         setBirth(json.data.birth);
-
-        console.log(user);
         setsState(false);
     };
     useEffect(() => {
         getUser();
         if (!isAuth(token)) {
-            alert('로그인 후 이용하실 수 있어요😥');
-            return navigate('/login');
+            Swal.fire({
+                confirmButtonColor: '#2fbe9f',
+
+                confirmButtonText: '확인',
+                text: '로그인 후 이용하실 수 있어요😥', // Alert 제목 
+
+            });
+            navigate('/login');
         }
     }, [state == true]);
     let nicBody = {
@@ -86,12 +89,29 @@ const User = (props) => {
 
                 .then(function (response) {
                     if (response.data == false) {
-                        alert("중복된 닉네임입니다!");
+                        Swal.fire({
+                            confirmButtonColor: '#2fbe9f',
+
+                            confirmButtonText: '확인',
+                            text: '중복된 닉네임입니다!😢', // Alert 제목 
+
+                        });
+
                     } else {
-                        localStorage.clear();
-                        props.setUserNickName('');
-                        alert("닉네임이 수정되었습니다. 다시 로그인해주세요!");
-                        navigate('/');
+                        Swal.fire({
+                            confirmButtonColor: '#2fbe9f',
+
+                            confirmButtonText: '확인',
+                            html: '닉네임이 수정되었습니다.<br>다시 로그인해주세요!😊', // Alert 제목 
+
+                        }).then((re) => {
+                            if (re.isConfirmed) {
+                                localStorage.clear();
+                                props.setUserNickName('');
+                                navigate('/');
+                            }
+                        });
+
                     }
 
 
@@ -99,8 +119,6 @@ const User = (props) => {
                 })
                 .catch(function (err) {
                     console.log(err);
-                    console.log(origin);
-
                 });
 
         }
@@ -125,18 +143,26 @@ const User = (props) => {
             axios
                 .post('/api/user/' + userId + '/birth', birthBody)
                 .then(function (response) {
-                    console.log(response.status, '성공');
-                    localStorage.clear();
-                    props.setUserNickName('');
-                    alert("생년월일이 수정되었습니다. 다시 로그인해주세요!");
-                    navigate('/');
+                    Swal.fire({
+                        confirmButtonColor: '#2fbe9f',
+
+                        confirmButtonText: '확인',
+                        html: '생년월일이 수정되었습니다.<br>다시 로그인해주세요!😊', // Alert 제목 
+
+                    }).then((re) => {
+                        if (re.isConfirmed) {
+                            localStorage.clear();
+                            props.setUserNickName('');
+                            navigate('/');
+                        }
+                    });
+
 
 
 
                 })
                 .catch(function (err) {
                     console.log(err);
-                    console.log(origin);
 
                 });
 
@@ -177,21 +203,35 @@ const User = (props) => {
                 .post('/api/user/' + userId + '/password', pasBody)
                 .then(function (response) {
                     if (response.data == false) {
-                        alert("비밀번호 오류!");
-                    } else {
+                        Swal.fire({
+                            confirmButtonColor: '#2fbe9f',
 
-                        localStorage.clear();
-                        props.setUserNickName('');
-                        alert("비밀번호가 수정되었습니다. 다시 로그인해주세요!");
-                        navigate('/');
+                            confirmButtonText: '확인',
+                            text: '비밀번호가 틀렸습니다!😢', // Alert 제목 
+
+                        });
+
+                    } else {
+                        Swal.fire({
+                            confirmButtonColor: '#2fbe9f',
+
+                            confirmButtonText: '확인',
+                            html: '비밀번호가 수정되었습니다.<br>다시 로그인해주세요!😊', // Alert 제목 
+
+                        }).then((re) => {
+                            if (re.isConfirmed) {
+                                localStorage.clear();
+                                props.setUserNickName('');
+                                navigate('/');
+                            }
+                        });
+
                     }
 
 
                 })
                 .catch(function (err) {
                     console.log(err);
-                    console.log(origin);
-
                 });
 
         }
@@ -209,28 +249,43 @@ const User = (props) => {
     const handleSubmitDel = (e) => {
         e.preventDefault();
 
-        if (window.confirm("정말 탈퇴하시겠습니까?") == true) {
-            axios
-                .post('/api/user/' + userId + '/delete', delBody)
-                .then(function (response) {
-                    console.log(response.status, '성공');
+        Swal.fire({
+            showCancelButton: true,
+            confirmButtonColor: '#2fbe9f',
+            cancelButtonColor: '#fd565f',
+            confirmButtonText: '확인',
+            cancelButtonText: '취소',
+            text: '정말 탈퇴하시겠습니까?', // Alert 내용 
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios
+                    .post('/api/user/delete', delBody)
+                    .then(function (response) {
+                        console.log(response.status, '성공');
+                        Swal.fire({
 
-                    localStorage.clear();
-                    props.setUserNickName('');
-                    alert("탈퇴되었습니다!");
-                    navigate('/');
-                })
-                .catch(function (err) {
-                    console.log(delBody);
-                    console.log(err);
-                    console.log(origin);
+                            confirmButtonColor: '#2fbe9f',
 
-                });
-        }
-        else {
-            return;
-        }
+                            confirmButtonText: '확인',
 
+                            text: '탈퇴되었습니다!', // Alert 내용 
+                        }).then((re) => {
+                            if (re.isConfirmed) {
+                                localStorage.clear();
+                                props.setUserNickName('');
+
+                                navigate('/');
+                            }
+                        });
+                    })
+                    .catch(function (err) {
+                        console.log(delBody);
+                        console.log(err);
+
+                    });
+            }
+
+        });
     };
     // 닉네임
     const onChangeName = useCallback((e) => {
@@ -304,7 +359,6 @@ const User = (props) => {
         },
         [newPas]
     );
-    console.log(user.nickname);
     return (<div>
 
         <Container className="UserEditor">

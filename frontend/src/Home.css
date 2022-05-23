@@ -1,13 +1,43 @@
-.rankingbtn{
+.rankingbtn {
     font-size: 23px;
-    color: darkcyan;
+    color: rgb(130, 183, 183);
 }
 
-.rankingbtn:hover{
-    cursor:pointer;
-    color: lightpink;
+.rankingbtn:hover {
+    cursor: pointer;
+    color: rgb(255, 220, 63);
 }
 
-.selected{
-    color: red;
+.selected {
+    color: rgb(0, 135, 135);
+    border-bottom: 5px solid rgb(0, 135, 135);
+}
+
+.home_diary {
+    width: 100% !important;
+
+
+    text-overflow: ellipsis !important;
+    word-break: normal !important;
+    white-space: pre-line !important;
+    vertical-align: top;
+}
+
+.rankingnick{
+    font-size:18pt;
+    font-weight: 600;
+}
+
+.rankingnum{
+    font-size:14pt;
+    font-weight: 600;
+color:rgb(0, 135, 135);
+}
+
+.blank{
+    width:5px;
+}
+
+.blank2{
+    width:10px;
 }

@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import Swal from 'sweetalert2';
 import {
     Button,
     TextField,
@@ -28,13 +28,35 @@ const FindPassword = () => {
         axios.post('/api/user/password', { email: email })
             .then(function (res) {
                 if (res.data.success == true) {
-                    alert(res.data.message);
-                    navigate('/');
+                    Swal.fire({
+                        confirmButtonColor: '#2fbe9f',
+                        confirmButtonText: '확인',
+                        html: res.data.message, // Alert 제목 
+
+                    }).then((re) => {
+                        if (re.isConfirmed) {
+
+                            navigate('/');
+                        }
+                    });
+
 
                 } else if (res.data.success == false) {
-                    alert('회원에 등록되지 않은 이메일입니다😰 다시 시도해주세요.');
+                    Swal.fire({
+                        confirmButtonColor: '#2fbe9f',
+                        confirmButtonText: '확인',
+                        html: '회원에 등록되지 않은 이메일입니다😰<br>다시 시도해주세요!', // Alert 제목 
+
+                    });
+
                 } else {
-                    alert(res.data.message);
+                    Swal.fire({
+                        confirmButtonColor: '#2fbe9f',
+                        confirmButtonText: '확인',
+                        html: res.data.message, // Alert 제목 
+
+                    });
+
                 }
             })
             .catch(function (err) {
@@ -43,7 +65,13 @@ const FindPassword = () => {
                 console.log(origin);
                 console.log(err.response.data.message);
                 if (err.response.status === 400) {
-                    alert(err.response.data.message);
+                    Swal.fire({
+                        confirmButtonColor: '#2fbe9f',
+                        confirmButtonText: '확인',
+                        html: err.response.data.message, // Alert 제목 
+
+                    });
+
                 }
             });
     };

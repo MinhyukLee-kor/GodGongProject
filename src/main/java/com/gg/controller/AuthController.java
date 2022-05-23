@@ -94,19 +94,19 @@ public class AuthController {
                     return ResponseEntity.ok(new TokenRefreshReesponse(token, requestRefreshToken));
 
                 })
-                .orElseThrow(() -> new TokenRefreshException(requestRefreshToken, "Refresh token is not in database!"));
+                .orElseThrow(() -> new TokenRefreshException(requestRefreshToken, "리프레시 토큰이 데이터베이스에 없습니다!"));
     }
 
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         if(userRepository.existsByNickname(signUpRequest.getNickname())) {
-            return new ResponseEntity(new ApiResponse(false, " Nickname is already taken!"),
+            return new ResponseEntity(new ApiResponse(false, "이미 사용중인 닉네임 입니다. "),
                     HttpStatus.BAD_REQUEST);
         }
 
         if(userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return new ResponseEntity(new ApiResponse(false, "Email Address is already in use!"),
+            return new ResponseEntity(new ApiResponse(false, "이미 사용중인 이메일 입니다."),
                     HttpStatus.BAD_REQUEST);
         }
 
@@ -122,7 +122,7 @@ public class AuthController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                .orElseThrow(() -> new AppException("User Role not set."));
+                .orElseThrow(() -> new AppException("회원 권한이 설정되지 않았습니다."));
 
         user.setRoles(Collections.singleton(userRole));
 
@@ -132,6 +132,6 @@ public class AuthController {
                 .fromCurrentContextPath().path("/api/users/{email}")
                 .buildAndExpand(result.getEmail()).toUri();
 
-        return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
+        return ResponseEntity.created(location).body(new ApiResponse(true, "회원가입이 완료되었습니다."));
     }
 }

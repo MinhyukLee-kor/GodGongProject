@@ -1,6 +1,6 @@
 
-import { useState, useEffect, useContext } from "react";
-import { isAuth, getNickName } from './jwtCheck';
+import { useState, useEffect } from "react";
+import { isAuth } from './jwtCheck';
 import axios from 'axios';
 
 
@@ -14,17 +14,12 @@ import {
 } from '@mui/material/';
 import './diary.css';
 
-
+import Swal from 'sweetalert2';
 
 const DiaryDetail = () => {
 
     const token = JSON.parse(localStorage.getItem('accessToken'));
-    const nickName = getNickName(token);
     const { id } = useParams();
-
-    console.log(id);
-
-    let today = new Date();
 
 
     const [diaries, setDiaries] = useState();
@@ -35,15 +30,20 @@ const DiaryDetail = () => {
         const json = await axios.get('/api/diary/edit/' + id, { params: { diaryId: id } });
         setDiaries(json.data.diaryContent);
         setDate(json.data.diaryCreated);
-        console.log(json.data);
 
 
     };
     useEffect(() => {
         getDiaries();
         if (!isAuth(token)) {
-            alert('로그인 후 이용하실 수 있어요😥');
-            return navigate('/login');
+            Swal.fire({
+                confirmButtonColor: '#2fbe9f',
+
+                confirmButtonText: '확인',
+                text: '로그인 후 이용하실 수 있어요😥', // Alert 제목 
+
+            });
+            navigate('/login');
         }
     }, []);
 
@@ -55,28 +55,32 @@ const DiaryDetail = () => {
         content: edit
 
     };
-    console.log(edit);
+
 
     function move() {
-        navigate("/mypage/diary");
+        navigate("/mypage");
     }
     const handleSubmit = () => {
         axios
             .post('/api/diary/edit/' + id, body)
             .then(function (response) {
-                navigate('/mypage/diary');
-                console.log(response);
-                alert("수정되었습니다!");
+                Swal.fire({
+                    confirmButtonColor: '#2fbe9f',
+
+                    confirmButtonText: '확인',
+
+                    text: "일기가 수정되었습니다!😊", // Alert 내용 
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigate('/mypage');
+                    }
+
+                });
 
 
             })
             .catch(function (err) {
                 console.log(err);
-
-                console.log(origin);
-
-
-
             });
 
 

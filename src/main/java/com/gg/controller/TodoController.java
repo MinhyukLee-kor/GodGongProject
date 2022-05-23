@@ -2,21 +2,21 @@ package com.gg.controller;
 
 import com.gg.domain.Todo;
 import com.gg.service.TodoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api")
 public class TodoController {
 
-    @Autowired
-    TodoService todoService;
+    private final TodoService todoService;
 
-    @GetMapping("/mypage/todolist")
-    public List<Todo> todoList(String nickname){
-        return todoService.findByUserId(nickname);
+    @GetMapping("/todo/todolist")
+    public List<Todo> todoList(@RequestParam String userNickname){
+        return todoService.findByUserId(userNickname);
     }
 
     @PostMapping("/todo/insert")
@@ -32,10 +32,5 @@ public class TodoController {
     @GetMapping("/todo/room")
     public List<Todo> todoListInRoom(@RequestParam String roomNumber) {
         return todoService.findTodos(roomNumber);
-    }
-
-    @DeleteMapping("/todo/delete")
-    public void deleteTodo(@RequestParam String userNickname, String roomNumber){
-        todoService.deleteTodo(userNickname, roomNumber);
     }
 }

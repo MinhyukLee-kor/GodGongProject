@@ -24,6 +24,42 @@ p {
   padding-left: 20px;
 }
 
+/* 얼럿 css */
+.swal2-popup {
+  font-size: 1.6rem !important;
+  width: 38% !important;
+}
+
+.swal2-html-container {
+  font-size: 1.5rem !important;
+}
+
+.swal2-actions {
+
+  margin: 8px !important;
+
+}
+
+.swal2-styled.swal2-confirm {
+  border: 0;
+  border-radius: 0.25em;
+  background: initial;
+  background-color: #7066e0;
+  color: #fff;
+  font-size: 20px !important;
+  padding: 10px !important;
+}
+
+.swal2-styled.swal2-cancel {
+  border: 0;
+  border-radius: 0.25em;
+  background: initial;
+  background-color: #dc3741;
+  color: #fff;
+  font-size: 20px !important;
+  padding: 10px !important;
+}
+
 .check {
   display: flex;
   text-align: end;

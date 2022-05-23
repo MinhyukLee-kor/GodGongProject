@@ -20,19 +20,15 @@ let FireNav = styled(List)({
 
 function CheckboxTodo({ nickname, myNickname, roomNum, client, todos, checkNum }) {
 
-    let [checked, setChecked] = useState([]);
+    let [checkNumber, setCheckedNumber] = useState(checkNum);
     let [modalOpen, setModalOpen] = useState(false);
 
     let handleToggle = (todo) => () => {
 
-
-        let currentIndex = checked.indexOf(todo.todoContent);
-        let newChecked = [...checked];
-
-        if (currentIndex === -1) {
-            newChecked.push(todo.todoContent);
+        if (todo.todoCheck) {
+            setCheckedNumber(--checkNumber);
         } else {
-            newChecked.splice(currentIndex, 1);
+            setCheckedNumber(++checkNumber);
         }
 
         try {
@@ -45,10 +41,7 @@ function CheckboxTodo({ nickname, myNickname, roomNum, client, todos, checkNum }
             console.log(err.message);
         }
 
-        setChecked(newChecked);
-
-        if (newChecked.length == todos.length) {
-            setModalOpen(true);
+        if (checkNumber == todos.length) {
             try {
                 client.publish({
                     destination: '/pub/chat/message',
@@ -58,6 +51,7 @@ function CheckboxTodo({ nickname, myNickname, roomNum, client, todos, checkNum }
                         message: myNickname + '님이 todo를 완료하셨습니다🎉'
                     })
                 });
+                setModalOpen(true);
             } catch (err) {
                 console.log(err.message);
             }

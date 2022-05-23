@@ -6,30 +6,24 @@ import com.gg.domain.User;
 import com.gg.repository.RoomRepository;
 import com.gg.repository.TodoRepository;
 import com.gg.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class TodoService {
 
-    @Autowired
-    TodoRepository todoRepository;
+    private final TodoRepository todoRepository;
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    RoomRepository roomRepository;
+    private final RoomRepository roomRepository;
 
     public List<Todo> findByUserId(String nickname){
         User user = userRepository.findByNickname(nickname);
         return todoRepository.findByUserId(user.getId());
-    }
-
-    public Todo findByTodoId(Long todoId){
-        return todoRepository.findById(todoId).get();
     }
 
     public Todo insertTodo(String nickname, String content, String roomNumber){

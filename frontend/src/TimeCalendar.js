@@ -68,23 +68,26 @@ function TimeCalendar() {
         <div className='calendar-container'>
           <Calendar onChange={setDate} value={date}/>
         </div>
+        
       </div>
 
       <div className='totaltime'>
         <div className='totaltime2'>
-            <h1>{date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()} 공부시간</h1>
-            {test(caltime)}
-          <h1>오늘의 공부시간</h1>
-            {test(time[0])=="NaN시간 NaN분 NaN초" ? "0시간 0분 0초":test(time[0])}
 
-          <h1>이번주 공부시간</h1>
-            {test(time[1])=="NaN시간 NaN분 NaN초" ? "0시간 0분 0초":test(time[1])}
+            <h3 className="clickedDate">•{date.getFullYear()+"년 "+(date.getMonth()+1)+"월 "+date.getDate()+"일"} 공부시간</h3>
+            <div className="totaltime3">{test(caltime)}</div>
 
-          <h1>이번달 공부시간</h1>
-            {test(time[2])=="NaN시간 NaN분 NaN초" ? "0시간 0분 0초":test(time[2])}
+            <h3 className="todaystime">•오늘의 공부시간</h3>
+            <div className="totaltime3">{test(time[0])=="NaN시간 NaN분 NaN초" ? "0시간 0분 0초":test(time[0])}</div>
 
-          <h1>나의 총 공부시간</h1>
-            {test(time[3])=="NaN시간 NaN분 NaN초" ? "0시간 0분 0초":test(time[3])}
+          <h3>•이번주 공부시간</h3>
+          <div className="totaltime3">{test(time[1])=="NaN시간 NaN분 NaN초" ? "0시간 0분 0초":test(time[1])}</div>
+
+          <h3>•이번달 공부시간</h3>
+          <div className="totaltime3">{test(time[2])=="NaN시간 NaN분 NaN초" ? "0시간 0분 0초":test(time[2])}</div>
+
+          <h3>•나의 총 공부시간</h3>
+          <div className="totaltime3">{test(time[3])=="NaN시간 NaN분 NaN초" ? "0시간 0분 0초":test(time[3])}</div>
         </div>
       </div>
 

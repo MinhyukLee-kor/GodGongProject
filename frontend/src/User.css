@@ -2,10 +2,15 @@
 
 
     padding: 20px;
-
     width: 60% !important;
+
+
 }
 
+.UserEditor span {
+    margin-top: 1rem;
+    margin-left: 24%;
+}
 
 
 .UserEditor label {
@@ -56,34 +61,9 @@
     font-weight: 600;
 }
 
-.DiaryButton {
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
 
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
 
-    font-size: 18px;
-    white-space: nowrap;
-}
 
-.DiaryButton_default {
-    background-color: #ececec;
-    color: black;
-}
-
-.DiaryButton_positive {
-    background-color: #2fbe9f;
-    color: white;
-}
-
-.DiaryButton_negative {
-    background-color: #fd565f;
-    color: white;
-}
 
 .userFlex {
     display: flex;
@@ -127,7 +107,6 @@ h2 {
     letter-spacing: -1px;
     width: 70%;
     top: 50%;
-    left: 22%;
     position: absolute;
 
 
@@ -140,17 +119,19 @@ h2 {
     letter-spacing: -1px;
     width: 2%;
     top: 130%;
-    left: 92%;
+    right: 6%;
     position: absolute;
 
+
 }
+
 
 .success {
     display: none;
 }
 
 .error {
-    color: #ff2727;
+    color: #fd565f;
 }
 
 .userDelBtn {

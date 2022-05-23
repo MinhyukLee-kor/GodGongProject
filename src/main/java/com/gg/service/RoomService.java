@@ -2,7 +2,6 @@ package com.gg.service;
 
 import com.gg.domain.Room;
 import com.gg.domain.User;
-import com.gg.payload.UserSummary;
 import com.gg.repository.RoomRepository;
 import com.gg.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +18,7 @@ public class RoomService {
     private final UserRepository userRepository;
 
     public List<Room> findAllRooms(){
-        List<Room> rooms = roomRepository.findAll();
+        List<Room> rooms = roomRepository.findAllByRoomValidTrue();
         Collections.reverse(rooms);
 
         return rooms;

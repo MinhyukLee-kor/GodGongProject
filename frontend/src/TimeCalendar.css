@@ -1,6 +1,6 @@
 .page{
-    width:1140px;
-    height:400px;
+    width:800px;
+    height:500px;
     margin:0 auto;
 
 }
@@ -9,12 +9,15 @@
     float:left;
     width:500px;
     height:400px;
+    margin-right:20px;
 }
 
 .calendar-container{
-    margin: 0 auto;
+    margin: 20px auto 20px auto;
     font-size:15pt;
+
 }
+
 
 .text-center{
     margin-top:20px;
@@ -26,6 +29,20 @@
 }
 
 .totaltime2{
-    margin-top:20px;
+    padding-top:20px;
+}
+
+.totaltime2 h3{
+    text-align: left;
+}
+
+.clickedDate{
+    margin-top:50px;
+
+}
+
+.totaltime3{
+    font-size:35px;
+    margin-bottom:20px;
 }
 

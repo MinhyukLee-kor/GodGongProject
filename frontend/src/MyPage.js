@@ -1,72 +1,56 @@
-import { SetMealRounded } from "@mui/icons-material";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { Link } from "react-router-dom";
 import DiaryList from './DiaryList.js';
 import TimeCalendar from './TimeCalendar.js';
 import User from './user.js';
 import { isAuth, getNickName } from './jwtCheck';
-import './Mypage.css';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import TimelapseIcon from '@mui/icons-material/Timelapse';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
+import PersonSearchRoundedIcon from '@mui/icons-material/PersonSearchRounded';
+import MyTodo from "./MyTodo.js";
+import Swal from 'sweetalert2';
+
 function MyPage(props) {
-    let [userNickName, setUserNickName] = useState('');
-    let [isLogin, setIsLogin] = useState(false);
 
-
-    useEffect(() => {
-        const token = JSON.parse(localStorage.getItem('accessToken'));
-
-        if (isAuth(token)) {
-            setUserNickName(getNickName(token));
-            setIsLogin(true);
-        } else {
-            setIsLogin(false);
-        }
-    }, [isLogin]);
     let navigate = useNavigate();
-    const token = JSON.parse(localStorage.getItem('accessToken'));
-    const [menu, setMenu] = useState(3);
-    if (!isAuth(token)) {
-        alert('로그인 후 이용하실 수 있어요😥');
-        return navigate('/login');
-    }
-    let onClickFuncStudy = () => {
-        setMenu(1);
-    };
-    let onClickFuncTodo = () => {
-        setMenu(2);
-    };
-    let onClickFuncDiary = () => {
-        setMenu(3);
-    };
-    let onClickFuncUser = () => {
-        setMenu(4);
+    let token = JSON.parse(localStorage.getItem('accessToken'));
+    let [menu, setMenu] = useState(2);
+
+    let handleChange = (event, newValue) => {
+        setMenu(newValue);
     };
 
+    if (!isAuth(token)) {
+
+        Swal.fire({
+            confirmButtonColor: '#2fbe9f',
+
+            confirmButtonText: '확인',
+            text: '로그인 후 이용하실 수 있어요😥', // Alert 제목 
+
+        });
+        navigate('/login');
+    }
 
     return (
-        <div>
+        <div style={{ textAlign: 'center' }}>
             <h3>{getNickName(token)}님의 마이페이지💁🏻‍♀️</h3>
-            <div className="mypageFlex">
-                <div className="menu">
-                    {/* mypage/studylog */}
-                    <a onClick={onClickFuncStudy}>
-                        <h3>공부시간</h3>
-                    </a>
-                    {/* mypage/todo */}
-                    <a onClick={onClickFuncTodo}>
-                        <h3>투두리스트</h3>
-                    </a>
-                    <a onClick={onClickFuncDiary}>
-                        <h3>공부일기 목록</h3>
-                    </a>
-                    <a onClick={onClickFuncUser}>
-                        <h3>회원정보 수정</h3>
-                    </a>
-                </div>
-                <div className="page">
-                    {menu == 1 ? <TimeCalendar /> : menu == 2 ? <User /> : menu == 3 ? <DiaryList /> : <User />}
-                </div>
-            </div>
+            <Tabs value={menu} onChange={handleChange} centered={true}>
+                <Tab icon={<TimelapseIcon />} label="공부시간" />
+                <Tab icon={<ListAltIcon />} label="투두리스트" />
+                <Tab icon={<BorderColorRoundedIcon />} label="공부일기" />
+                <Tab icon={<PersonSearchRoundedIcon />} label="회원정보" />
+            </Tabs>
+            {menu == 0
+                ? <TimeCalendar />
+                : menu == 1
+                    ? <MyTodo />
+                    : menu == 2
+                        ? <DiaryList />
+                        : <User setUserNickName={props.setUserNickName} />}
         </div>
     );
 }

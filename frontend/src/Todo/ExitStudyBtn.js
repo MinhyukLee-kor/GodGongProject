@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import TodoModal from './TodoModal.js';
 import Button from '@mui/material/Button';
 
-function ExitStudyBtn({task}) {
+function ExitStudyBtn() {
 
     let [modalOpen, setModalOpen] = useState(false);
 
@@ -10,15 +10,15 @@ function ExitStudyBtn({task}) {
         <div>
             <Button
                 variant="contained"
-                style={{ backgroundColor: 'red' }}
+                style={{ backgroundColor: '#FD565F' }}
                 onClick={() => setModalOpen(true)}>
                 퇴장
             </Button>
             {
                 modalOpen && <TodoModal
-                    task={task}
+                    task='exit'
                     open={modalOpen}
-                    setOpen={setModalOpen}/>
+                    setOpen={setModalOpen} />
             }
         </div>
     );

@@ -35,6 +35,7 @@ textarea {
     border: 3px solid #2fbe9f;
     border-radius: 20px;
     resize: none;
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 
 }
 
@@ -49,35 +50,7 @@ textarea {
     cursor: pointer;
     margin-left: 10px;
     height: 40px;
-}
-
-.DiaryButton {
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-
-    font-size: 18px;
-    white-space: nowrap;
-}
-
-.DiaryButton_default {
-    background-color: #ececec;
-    color: black;
-}
-
-.DiaryButton_positive {
-    background-color: #2fbe9f;
-    color: white;
-}
-
-.DiaryButton_negative {
-    background-color: #fd565f;
-    color: white;
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 }
 
 
@@ -106,24 +79,4 @@ h2 {
     border-radius: 10px;
     color: #ececec;
     font-weight: 600;
-}
-
-.message {
-    font-weight: 500;
-    font-size: 1rem;
-    line-height: 24px;
-    letter-spacing: -1px;
-
-    bottom: -10px;
-    left: 0;
-
-
-}
-
-.success {
-    display: none;
-}
-
-.error {
-    color: #ff2727;
 }

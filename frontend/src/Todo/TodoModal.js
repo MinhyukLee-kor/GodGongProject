@@ -45,7 +45,7 @@ const ModalInner = styled.div`
   padding: 40px 30px;
 `
 
-function Modal({ task, open, setOpen, setUpdate }) {
+function Modal({ task, open, setOpen, update, setUpdate }) {
 
   return (
     <div>
@@ -55,7 +55,7 @@ function Modal({ task, open, setOpen, setUpdate }) {
           <CloseIcon onClick={() => setOpen(false)} sx={{ float: 'right', cursor: 'pointer' }} /><br />
           {
             task == 'createStudy'
-              ? <MakeTodoStudy setOpen={setOpen} setUpdate={setUpdate} />
+              ? <MakeTodoStudy setOpen={setOpen} update={update} setUpdate={setUpdate} />
               : (
                 task == 'onlyMake' || task == 'join'
                   ? <MakeTodo setOpen={setOpen} task={task} />

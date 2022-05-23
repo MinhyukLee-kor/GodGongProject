@@ -37,6 +37,7 @@ function App() {
 
     return (
         <div className="App">
+
             <Header userNickName={userNickName} setUserNickName={setUserNickName} />
 
             <Routes>
@@ -44,16 +45,14 @@ function App() {
                 <Route path="/login" element={<Login isLogin={isLogin} setIsLogin={setIsLogin} />} />
                 <Route path="/Join" element={<Join />} />
                 <Route path="/findPassword" element={<FindPassword />} />
-                <Route path="/mypage" element={<MyPage />} />
-                <Route path="/mypage/diary" element={<DiaryList />} />
+                <Route path="/mypage" element={<MyPage setUserNickName={setUserNickName}/>} />
                 <Route path="/mypage/diaryDetail/:id" element={<DiaryDetail />} />
                 <Route path="/challenge" element={<Challenge />} />
                 <Route path="/timecalendar" element={<TimeCalendar />} />
                 <Route path="/diary" element={<Diary />} />
-                <Route path='/mypage/user' element={<User setUserNickName={setUserNickName} />} />
                 <Route path="/todoStudy" element={<TodoStudyList />} />
                 <Route path="/todoStudy/:roomNum" element={<TodoStudyRoom />} />
-                <Route path="/user/passwordChange/:key" element={<EditPassword />} />
+                <Route path="/user/passwordChange/:key" element={<EditPassword setUserNickName={setUserNickName}/>} />
             </Routes>
 
             <Footer />

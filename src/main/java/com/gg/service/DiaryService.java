@@ -25,7 +25,7 @@ public class DiaryService {
     UserRepository userRepository;
 
     public List<Diary> findByUserNickname(String nickname){
-        List<Diary> diary = diaryRepository.findByUserNickname(nickname);
+        List<Diary> diary = diaryRepository.findByUserNicknameOrderByDiaryCreatedDesc(nickname);
         return diary;
     }
 

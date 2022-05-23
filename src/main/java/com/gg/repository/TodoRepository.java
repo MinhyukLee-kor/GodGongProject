@@ -17,4 +17,6 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
     void deleteAllByUserAndRoom(User user, Room room);
     @Query(value = "select * from todo where user_id in (select user_id from roomlog where room_room_id = ?1) and room_room_id = ?1", nativeQuery = true)
     List<Todo> findTodos(long roomId);
+
+    void deleteAllByUserId(Long Id);
 }
